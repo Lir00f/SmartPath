@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartPath - твой личный помощник!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./fontawesome-free-5.13.0-web/css/all/css">
+    <script src="swiper.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div class="running-text-container">
+      <div class="running-text">SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH SMARTPATH </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
+    <script>
+      SmoothScroll({
+      // Время скролла 400 = 0.4 секунды
+      animationTime : 800,
+      // Размер шага в пикселях
+      stepSize : 75,
+      // Дополнительные настройки:
+      // Ускорение
+      accelerationDelta : 30,
+      // Максимальное ускорение
+      accelerationMax : 2,
+      // Поддержка клавиатуры
+      keyboardSupport : true,
+      // Шаг скролла стрелками на клавиатуре в пикселях
+      arrowScroll : 50,
+      // Pulse (less tweakable)
+      // ratio of "tail" to "acceleration"
+      pulseAlgorithm : true,
+      pulseScale : 4,
+      pulseNormalize : 1,
+      // Поддержка тачпада
+      touchpadSupport : true,
+      })
+      </script>
+      <script>
+        
+
+const burger = document.querySelector('.menu-icon');
+const menu = document.querySelector('.menu');
+const body = document.body
+
+if (burger && menu) {
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('_active');
+        menu.classList.toggle('_active');
+        body.classList.toggle('_lock');
+    })
+}
+      </script>
+    <script type="module" src="src/js/main.js"></script>
+    <header id="header-section">
+      
+      <div class="container">
+        <div class="header">
+          <a href="#"><h1 class="header__logo">SmartPath</h1></a>
+          <div class="menu-wrapper">
+            <nav class="menu">
+              <ul class="header__list">
+                <li class="header__item"><a class="header__link active" href="#">Главная</a></li>
+                <li class="header__item"><a class="header__link" href="#about__section">О нас</a></li>
+                <li class="header__item"><a class="header__link" href="#rates-section">Процесс обучения</a></li>
+                <% if (user) { %>
+                <li class="header__item"><a class="header__link" href="/lk">Личный Кабинет</a></li>
+                <% } else { %>
+
+                  <% } %> 
+              </ul>
+            </nav>
+            <% if (user) { %>
+              <!-- Пользователь аутентифицирован, показываем кнопку "Выйти" -->
+              <form id="logoutForm" method="post" action="/logout">
+                <button class="header__btn" type="submit">Выйти</button>
+              </form>
+            <% } else { %>
+              <!-- Пользователь не аутентифицирован, показываем кнопки "Регистрация" и "Вход" -->
+              <button class="header__btn"><a href="register" class="header__link">Регистрация</a></button>
+              <button class="header__btn" id="loginButton">Вход</button>
+            <% } %>               
+            <script>
+const logoutForm = document.getElementById('logoutForm');
+
+if (logoutForm) {
+  logoutForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    console.log('Форма отправлена');
+    fetch('/logout', {
+      method: 'POST',
+    }).then((response) => {
+      console.log('Ответ получен');
+      if (response.ok) {
+        // После успешного выхода из сессии перезагрузите страницу или перенаправьтесь, где вам нужно
+        window.location.reload();
+      }
+    });
+  });
+}
+
+
+            </script>      
+            <script>
+              document.addEventListener('DOMContentLoaded', () => {
+  // Ваш JavaScript-код для открытия модального окна
+              const loginButton = document.getElementById('loginButton');
+              const loginModal = document.getElementById('loginModal');
+              const loginClose = document.getElementById('loginClose');
+            
+              // При клике на кнопку "Вход", открываем модальное окно
+              loginButton.addEventListener('click', () => {
+                loginModal.style.display = 'block';
+              });
+            
+              // При клике на крестик, закрываем модальное окно
+              loginClose.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+              });
+            
+              // Закрываем модальное окно, если пользователь кликает вне его
+              window.addEventListener('click', (event) => {
+                if (event.target === loginModal) {
+                  loginModal.style.display = 'none';
+                }
+              });
+            });
+            </script>
+          </div>
+          
+          <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="flash-messages">
+        <% if (typeof messages !== 'undefined') { %>
+          <ul>
+            <% messages.forEach(function(message) { %>
+              <li><%= message %></li>
+            <% }); %>
+          </ul>
+        <% } %>
+      </div>
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="loginClose">&times;</span>
+    <h2>Вход</h2>
+    <form action="/login" method="POST">
+      <label for="username">Имя пользователя:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button class="button4" type="submit">Войти</button>
+    </form>
+  </div>
+</div>
+<style>/* Стили для модальных окон */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999; /* Установите высокое значение z-index */
+}
+  
+  .modal-content {
+    background-color: #fff;
+    width: 300px;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: black;
+  }
+  
+  form {
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .button4 {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .button4:hover {
+    background-color: #0056b3;
+  }
+  </style>  
+      <section id="hero-section">
+        <img class="hero__img" src="/img/main3.png" alt="hero banner">
+        <div class="container-small" data-aos="fade-up">
+          <div class="hero  close_modal">
+            <h2 class="hero__title" style="line-height: 55px;">SmartPath - <br>образование, <br>доступное каждому</h2>
+            <p class="hero__text">Мы поможем тебе успешно поступить, идти вперед, а также откроем перед тобой множество новых возможностей. Для начала, можем предложить пройти тест на определение специальности!</p>
+            <div class="hero-socials">
+              <a href="#"><img class="hero__social" src="/favicon/socials/1.svg" alt="social 1"></a>
+              <a href="#"><img class="hero__social" src="/favicon/socials/2.svg" alt="social 2"></a>
+              <a href="#"><img class="hero__social" src="/favicon/socials/3.svg" alt="social 3"></a>
+              <a href="#"><img class="hero__social" src="/favicon/socials/4.svg" alt="social 4"></a>
+              
+            </div>
+            <button class="hero__btn"><a href="/lk" class="hero__btn__ashka">Пройти тест на специальность</a></button>
+            <div id="my-modal" class="modal">
+              <div class="modal-window">
+                <h2 class="modal__title">Бесплатная консультация</h2>
+                <p class="modal__desc">Миша заполни этот текст турурурур руруру руруру руруру руруру руурурру рурур</p>
+                <input class="modal__input" type="text" placeholder="Введите Ваше имя">
+                <input class="modal__input" type="tel" placeholder="+7 (999) 999 99-99">
+                <input class="modal__input" type="email" placeholder="email@gmail.com (не обязательно)">
+                <h4 class="modal__text">Как я бы мог с вами связаться?</h4>
+                <ul class="modal__list">
+                  <div class="modal__list_check">
+                    <input type="checkbox" id="myCheckbox">
+                    <p class="modal__item">Написать Вам на почту</p>
+                  </div>
+                  <div class="modal__list_check">
+                    <input type="checkbox" id="myCheckbox">
+                    <p class="modal__item">Связаться с вами через WhatsApp</p>
+                  </div>
+                  <div class="modal__list_check">
+                    <input class="modal__check" type="checkbox" id="myCheckbox">
+                    <p class="modal__item">Связаться с вами через Telegram</p>
+                  </div>
+                </ul>
+                <button class="modal__btn">Получить консультацию</button>
+                <p class="modal__copyright">Your data will never be passed on to third parties</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="about-section">
+        <div class="container-default">
+          <div class="about-blocks">
+            <div class="about-block">
+              <h3 class="about-block__title">Поддержка</h3>
+              <p class="about-block__text">Инклюзивная поддержка для всех</p>
+              <img class="about-block__img" src="/favicon/blocks/1.svg" alt="block 1">
+            </div>
+            <div class="about-block">
+              <h3 class="about-block__title">ЕГЭ и тесты</h3>
+              <p class="about-block__text">Тесты которые помогут определить специальность</p>
+              <img class="about-block__img2" src="/favicon/blocks/2.svg" alt="block 2">
+            </div>
+            <div class="about-block">
+              <h3 class="about-block__title">Материалы</h3>
+              <p class="about-block__text">Ресурсы и советы для поступления</p>
+              <img class="about-block__img3" src="/favicon/blocks/3.svg" alt="block 3">
+            </div>
+            <div class="about-block">
+              <h3 class="about-block__title">Подход</h3>
+              <p class="about-block__text">Персонализированная помощь поступающим студентам</p>
+              <img class="about-block__img4" src="/favicon/blocks/4.svg" alt="block 4">
+            </div>
+          </div>
+          <div class="container-small">
+            <h2 class="about__title" id="about__section">О нас:</h2>
+            <div class="about-info">
+              <div style="width: 552px; height: 575px; z-index: 55; "><img class="about__img" style="margin-top: 130px;" src="/img/logo5.png" alt="about img"></div>
+              <div class="about-puncts">
+                <p class="about__name">Smart<span>Path</span></p>
+                <ul class="about-puncts__list">
+                  <li class="about-puncts__item">Мы предлагаем <span>общение</span> в нашем бесплатном  <br>чате с уже поступившими студентами.</li>
+                  <li class="about-puncts__item">Мы поможем вам не только найти <span>лучший ВУЗ </span><br>под свои требования, но и <span>окажем <br>помощь</span> в подготовке</li>
+                  <li class="about-puncts__item">Обзор курсов и <span>специальностей</span> для вашей <br>карьеры.</li>
+                  <li class="about-puncts__item">Заинтересованные <span>преподаватели</span> и <br>наставники.</li>
+                  <li class="about-puncts__item"><span>Индивидуальные планы</span> для успешного <br>поступления.</li>
+                  <li class="about-puncts__item"><span>Профессиональные рекомендации</span> от <br>специалистов в области образования.</li>
+                </ul>
+                <div class="about-add__blocks">
+                  <div class="about-add__block"></div>
+                  <div class="about-add__block"></div>
+                  <div class="about-add__block"></div>
+                  <div class="about-add__block"></div>
+                  <div class="about-add__block"></div>
+                </div>
+              </div>
+              <img class="about__deco" src="/favicon/blue-bg.svg" alt="">
+              <img class="about__deco2" src="/favicon/blue-bg2.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="rates-section">
+        <div class="container-default">
+          <div id="my-modal" class="modal__rates">
+            <div class="modal-window__rates">
+              <h2 class="modal-window__rates_title">Оставьте свои данные и я свяжусь с вами!</h2>
+              <p class="modal-window__rates_subtitle">Вы выбрали тариф эконом для Яндекс.Директ</p>
+              <input class="rates__input" type="text" name="" id="" placeholder="Введите Ваше имя">
+              <input class="rates__input" type="text" name="" id="" placeholder="+7 (999) 999 99-99">
+              <input class="rates__input" type="text" name="" id="" placeholder="email@gmail.com">
+              <div class="rates__input__items">
+                <div class="rates__input_wrapper">
+                  <img src="/favicon/telegram.svg" alt="telegram icon">
+                  <input class="rates__input_small" type="checkbox">
+                </div>
+                <div class="rates__input_wrapper">
+                  <img src="/favicon/whatsapp.svg" alt="telegram icon">
+                  <input class="rates__input_small" type="checkbox">
+                </div>
+                <div class="rates__input_wrapper">
+                  <img src="/favicon/mail.svg" alt="telegram icon">
+                  <input class="rates__input_small" type="checkbox">
+                </div>
+              </div>
+              <button class="modal-window__rates_btn">Оставить заявку</button>
+              <p class="copyrigth__text">Your data will never be passed on to third parties</p>
+            </div>
+          </div>
+
+          <div class="rates">
+            <div class="rates-title">
+              <h2 class="rates-title__title">Новости</h2>
+              <p class="rates-title__text">На данной странице вы можете просмотреть актуальные новости связанные с образованием.</p>
+
+              
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="container2">
+              <% for (let i = 0; i < newsData.length; i++) { %>
+                <div class="box2">
+                  <img src="<%= newsData[i].image %>" alt="<%= i + 1 %>" style="border-radius: 25px; cursor:pointer; width: 100%; max-height: 192px;">
+                  <br>
+                  <p class="bebrus" style="font-weight: bold; padding-top: 15px; padding-left: 10px"><%= newsData[i].title %></p>
+                  <p class="leftone"><%= newsData[i].publish_date %></p>
+                  <p class="rightone">Читать далее</p>
+                </div>
+              <% } %>
+            </div>
+            
+
+            
+                 
+          <br>
+          <br>
+          <br>
+          <style>
+.bebrus {
+  color: black;
+}
+            .container2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 41px; /* Задает расстояние между дивами */
+}
+
+.box2 {
+    width: 342px;
+    height: 346px;
+    border-radius: 25px;
+    position: relative; /* Добавьте это свойство, чтобы включить позиционирование */
+}
+
+.leftone {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    font-weight: 400;
+}
+
+.rightone {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-weight: normal;
+    font-weight: 600;
+}
+
+          </style>          
+            </div>  
+            <main class="content" data-form-type="card">
+              <a href="javascript:;" class="btn">
+                <span class="btn__circle"></span>
+                <span class="btn__white-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="icon-arrow-right" viewBox="0 0 21 12">
+                    <path d="M17.104 5.072l-4.138-4.014L14.056 0l6 5.82-6 5.82-1.09-1.057 4.138-4.014H0V5.072h17.104z"></path>
+                  </svg>
+                </span>
+                <span id="open-modal__btn" class="btn__text" style="color: black;">Смотреть еще</span>
+              </a>
+            </main>
+
+          <div class="rates">
+            <div class="rates-title">
+              <h2 class="rates-title__title">ВУЗы</h2>
+              <p class="rates-title__text">Здесь представлены колледжи и ВУЗы сортированные по рейтингу</p>
+            </div>
+            <div class="rates-links">
+              <a class="rates__link" href="#">ВУЗы</a>
+              <a class="rates__link" href="#">Колледжи</a>
+            </div>
+
+<!-- news.ejs -->
+<% vuziData.forEach(vuzi => { %>
+  <br>
+  <div class="rates-create" style="display: inline;">
+    <div class="rates-block">
+      <h3 class="rates-block__title"><%= vuzi.title %></h3>
+      <img style="width: 250px; height: auto; border-radius: 0px 75px 75px 0px;" src="<%= vuzi.logo %>" alt="logo">
+      <br> <br>
+      <h3 class="rates-block__subtitle" style="line-height: 25px;"><%= vuzi.content %></h3>
+      <ul class="rates-block__list">
+
+      <li class="rates-block__item"> <span> <%= vuzi.mesto %> </span></li>
+      <li class="rates-block__item"> <span> <%= vuzi.special %> </span></li>
+      </ul>
+      <p class="rates-block__words">Средний балл поступивших - <%= vuzi.srball %></p>
+      <a class="rates-block__rate" href="<%= vuzi.website %>">Перейти на сайт ВУЗа</a>
+    </div>
+  </div>
+  <br>
+<% }); %>
+<main class="content" data-form-type="card">
+  <a href="javascript:;" class="btn">
+    <span class="btn__circle"></span>
+    <span class="btn__white-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" id="icon-arrow-right" viewBox="0 0 21 12">
+        <path d="M17.104 5.072l-4.138-4.014L14.056 0l6 5.82-6 5.82-1.09-1.057 4.138-4.014H0V5.072h17.104z"></path>
+      </svg>
+    </span>
+    <span id="open-modal__btn" class="btn__text" style="color: black;">Смотреть еще</span>
+  </a>
+</main>
+      </section>
+      <section id="job-section">
+        <img class="job__deco" src="/favicon/job-deco.svg" alt="job deco">
+        <div class="container-default">
+          <div class="job">
+            <h2 class="job__title">Какие возможности <br> мы открываем?</h2>
+            <div class="job__list_wrapper">
+              <ul class="job__list_left">
+                <li class="job__item">Помощь инклюзивным абитуриентам</li>
+                <li class="job__item">Чат с уже поступившими студентами</li>
+              </ul>
+              <ul class="job__list_right">
+                <li class="job__item">Поддержка и мотивация</li>
+                <li class="job__item">Создание сообщества</li>
+              </ul>
+            </div>
+            <main class="content" data-form-type="card">
+              <a href="javascript:;" class="btn">
+                <span class="btn__circle"></span>
+                <span class="btn__white-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="icon-arrow-right" viewBox="0 0 21 12">
+                    <path d="M17.104 5.072l-4.138-4.014L14.056 0l6 5.82-6 5.82-1.09-1.057 4.138-4.014H0V5.072h17.104z"></path>
+                  </svg>
+                </span>
+                <span id="open-modal__btn" class="btn__text">Бесплатная консультация</span>
+              </a>
+            </main>
+          </div>
+        </div>
+      </section>
+      <section id="process-section">
+        <div class="container-default">
+          <h2 class="process__title">Процесс обучения</h2>
+          <div class="process-wrapper">
+            <div class="process-block">
+              <span class="process-block__number">01</span>
+<h3 class="process-block__title ">Регистрация на портале</h3>
+<p class="process-block__description">Зарегистрируйся на портале для доступа к функционалу.</p>
+</div>
+<div class="process-block">
+<span class="process-block__number process_black">02</span>
+<h3 class="process-block__title">Поиск информации</h3>
+<p class="process-block__description">Ищи нужную информацию и материалы быстро и легко.</p>
+</div>
+<div class="process-block">
+<span class="process-block__number">03</span>
+<h3 class="process-block__title">Получение советов и руководств</h3>
+<p class="process-block__description">Получай полезные советы и руководства, помогающие в учебе.</p>
+</div>
+<div class="process-block">
+<span class="process-block__number">04</span>
+<h3 class="process-block__title">Общение с уже поступившими студентами</h3>
+<p class="process-block__description">Общайся с опытными студентами, задавай вопросы и получай ответы.</p>
+</div>
+<div class="process-block">
+<span class="process-block__number">05</span>
+<h3 class="process-block__title">Получение поддержки и мотивации</h3>
+<p class="process-block__description">Получай поддержку и мотивацию от сообщества студентов и преподавателей.</p>
+</div>
+<div class="process-block">
+<span class="process-block__number">06</span>
+<h3 class="process-block__title">Успешное поступление</h3>
+<p class="process-block__description">Достигни своей цели - успешно поступи в выбранный вуз.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="questions-section">
+        <div class="container-default">
+          <h2 class="questions__title">Ответы на вопросы</h2>
+          <div class="asking">
+            <div class="asking-wrapper">
+              <p class="asking__title">Почему?</p>
+              <img class="arrow_down" src="/favicon/arrow-down.svg" alt="">
+            </div>
+            <div class="answer">
+            <p class="answer__text">Ответ на вопрос "Почему?"</p>
+            </div>
+          </div>
+          <div class="asking">
+            <div class="asking-wrapper">
+              <p class="asking__title">Зачем и почему?</p>
+              <img class="arrow_down" src="/favicon/arrow-down.svg" alt="">
+            </div>
+            <div class="answer">
+            <p class="answer__text">Ответ на вопрос "Зачем и почему?"</p>
+            </div>
+          </div>
+          <div class="asking">
+            <div class="asking-wrapper">
+              <p class="asking__title">Завтра?</p>
+              <img class="arrow_down" src="/favicon/arrow-down.svg" alt="">
+            </div>
+            <div class="answer">
+            <p class="answer__text">Ответ на вопрос "Завтра?"</p>
+            </div>
+          </div>
+          <div class="asking">
+            <div class="asking-wrapper">
+              <p class="asking__title">Нет послезавтра?</p>
+              <img class="arrow_down" src="/favicon/arrow-down.svg" alt="">
+            </div>
+            <div class="answer">
+            <p class="answer__text">Ответ на вопрос "Нет послезавтра?"</p>
+            </div>
+          </div>
+          <div class="asking">
+            <div class="asking-wrapper">
+              <p class="asking__title">Хорошо?</p>
+              <img class="arrow_down" src="/favicon/arrow-down.svg" alt="">
+            </div>
+            <div class="answer">
+            <p class="answer__text">Ответ на вопрос "Хорошо?"</p>
+            </div>
+          </div>
+          <div class="asking">
+            <div class="asking-wrapper">
+              <p class="asking__title">Нет плохо?</p>
+              <img class="arrow_down" src="/favicon/arrow-down.svg" alt="">
+            </div>
+            <div class="answer">
+            <p class="answer__text">Ответ на вопрос "Нет плохо?"</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer-section">
+      <div class="container-default">
+        <div class="footer">
+          <h1 class="footer__logo">SmartPath</h1>
+          <ul class="footer__list">
+            <li class="footer__item">+7 978 (888) 88-88</li>
+            <li class="footer__item">ceo@smartpath.ru</li>
+          </ul>
+          <div class="footer-socials">
+            <p class="footer__social">email: <br> <span>ceo@smartpath.ru</span></p>
+            <p class="footer__social">telegram: <br> <span>@SmartPath</span></p>
+          </div>
+          <div class="footer-links">
+            <a class="footer__link" href="#">Политика конфиденциальности</a>
+            <a class="footer__link" href="#">Пользовательское соглашение</a>
+          </div>
+        </div>
+        <p class="footer__copyright">© 2023. Все права защищены</p>
+      </div>
+    </footer>
+  </body>
+  
+</html>
