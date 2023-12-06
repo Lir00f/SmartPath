@@ -15,7 +15,7 @@
         <!-- Sidebar Section -->
         <aside>
             <div class="toggle">
-                <div class="logo">
+                <div class="logo" style="cursor: pointer;" onclick="location.href='/';">
                     <img src="images/logo.png">
                     <h2>Smart<span class="danger">Path</span></h2>
                 </div>
@@ -27,23 +27,11 @@
             </div>
 
             <div class="sidebar">
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        dashboard
-                    </span>
-                    <h3>Дэшборд</h3>
-                </a>
-                <a href="#">
+                <a href="friends">
                     <span class="material-icons-sharp">
                         person_outline
                     </span>
                     <h3>Друзья</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        receipt_long
-                    </span>
-                    <h3>История</h3>
                 </a>
                 <a href="#" class="active">
                     <span class="material-icons-sharp">
@@ -62,26 +50,10 @@
                     <span class="material-icons-sharp">
                         inventory
                     </span>
-                    <h3>Задачи</h3>
+                    <h3>Тесты</h3>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        report_gmailerrorred
-                    </span>
-                    <h3>Отчёты</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        settings
-                    </span>
-                    <h3>Настройки</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        add
-                    </span>
-                    <h3>Добавить пользователя</h3>
-                </a>
+
+
                 <a href="#" id="logout-link">
                     <span class="material-icons-sharp">
                         logout
@@ -205,13 +177,20 @@
                 <div class="user-list">
                     <% for (let i = users.length - 1; i >= Math.max(0, users.length - 5); i--) { %>
                         <div class="user">
-                            <img src="<%= users[i].image %>" alt="Profile Photo">
+                            <% if (users[i].id === 33 || users[i].id === 30) { %>
+                                <video id="profileVideo" src="<%= users[i].image %>" autoplay loop muted playsinline
+                                    style="width: 5rem; height: 5rem; margin-bottom: 0.4rem; border-radius: 50%; object-fit: cover;">
+                                </video>
+                            <% } else { %>
+                                <img src="<%= users[i].image %>" alt="Profile Photo">
+                            <% } %>
                             <h2><%= users[i].fullname %></h2>
                             <center>
-                            <p>Новый пользователь</p>
-                        </center>
+                                <p>Новый пользователь</p>
+                            </center>
                         </div>
                     <% } %>
+                    
 
             </div>
             <!-- End of New Users Section -->
@@ -286,7 +265,13 @@
   
                     </div>
                     <div class="profile-photo">
-                        <img src="<%= targetUser.image %>" alt="Profile Photo">
+                        <% if (targetUser.id === 33 || targetUser.id === 30 ) { %>
+                            <video src="<%= targetUser.image %>" autoplay loop muted playsinline alt="Profile Video"
+                                style="width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover;">
+                            </video>                            
+                        <% } else { %>
+                            <img src="<%= targetUser.image %>" alt="Profile Photo">
+                        <% } %>
                       </div>                      
                 </div>
 
@@ -296,9 +281,17 @@
             <div class="user-profile" data-target="myModal3">
                 <div class="logo">
                     <center>
-                    <img src="<%= targetUser.image %>" alt="Profile Photo"></center>
-                    <h2><%= targetUser.fullname %></h2>
-
+                        <% if (targetUser.id === 33 || targetUser.id === 30) { %>
+                            <video src="<%= targetUser.image %>" autoplay loop muted playsinline alt="Profile Video"
+                                style="width: 13rem; height: 13rem; margin-bottom: 0.4rem; border-radius: 50%; object-fit: cover;">
+                            </video>
+                                                      
+                        <% } else { %>
+                            <img src="<%= targetUser.image %>" alt="Profile Photo">
+                        <% } %>
+                        
+                        <h2><%= targetUser.fullname %></h2>
+                        
 
                     <% if (userId) { %>
                         <% var targetUser = users.find(user => user.id === userId); %>

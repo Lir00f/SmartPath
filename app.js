@@ -291,6 +291,112 @@ app.get('/obuch', (req, res) => {
 });
 
 
+app.get('/friends', (req, res) => {
+  if (req.isAuthenticated()) {
+    const userId = req.user.id;
+
+    connection.query('SELECT * FROM users', (err, userRows) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Server error');
+      }
+
+      connection.query('SELECT * FROM friend_requests WHERE (from_user_id = ? OR to_user_id = ?) AND (status = "pending" OR status = "accepted")', [userId, userId], (err, friendRequestsRows) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('Server error');
+        }
+
+        userRows.forEach(user => {
+          if (user.id !== userId) {
+            const sentRequest = friendRequestsRows.find(request => request.from_user_id === userId && request.to_user_id === user.id);
+            const receivedRequest = friendRequestsRows.find(request => request.from_user_id === user.id && request.to_user_id === userId);
+
+            if (sentRequest && sentRequest.status === 'accepted') {
+              user.friendStatus = 'accepted';
+              user.request_id = sentRequest.id;
+            } else if (receivedRequest && receivedRequest.status === 'accepted') {
+              user.friendStatus = 'accepted';
+              user.request_id = receivedRequest.id;
+            } else if (sentRequest && sentRequest.status === 'pending') {
+              user.friendStatus = 'sent';
+              user.request_id = sentRequest.id;
+            } else if (receivedRequest && receivedRequest.status === 'pending') {
+              user.friendStatus = 'received';
+              user.request_id = receivedRequest.id;
+            } else {
+              user.friendStatus = 'not_friends';
+            }
+          }
+        });
+
+        res.render('friends', { users: userRows, userId, friendRequests: friendRequestsRows });
+      });
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+
+
+
+
+app.post('/friend-request/send', (req, res) => {
+  const { to_user_id } = req.body;
+  const from_user_id = req.user.id;
+
+  if (from_user_id && to_user_id) {
+    const newFriendRequest = {
+      from_user_id: from_user_id,
+      to_user_id: to_user_id
+    };
+
+    connection.query('INSERT INTO friend_requests SET ?', newFriendRequest, (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error);
+      } else {
+        res.redirect('/friends');
+      }
+    });
+  } else {
+    res.status(400).send('Invalid request');
+  }
+});
+
+// Handle the request to remove a friend
+app.post('/friend-request/remove', (req, res) => {
+  const { to_user_id } = req.body;
+  const from_user_id = req.session.user.id;
+
+  connection.query('DELETE FROM friend_requests WHERE (from_user_id = ? AND to_user_id = ?) OR (from_user_id = ? AND to_user_id = ?)', [from_user_id, to_user_id, to_user_id, from_user_id], (error, results, fields) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.redirect('/friends');
+    }
+  });
+});
+app.post('/friend-request/accept', (req, res) => {
+  const { request_id } = req.body;
+  console.log("Request ID:", request_id); // Add this line for debugging
+
+  if (request_id) {
+    connection.query('UPDATE friend_requests SET status = "accepted" WHERE id = ?', request_id, (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error);
+      } else {
+        // Add logic to create records in the 'friends' table if needed
+        // Assuming there's a 'friends' table, insert the corresponding records
+        // ...
+
+        res.redirect('/friends');
+      }
+    });
+  } else {
+    res.status(400).send('Invalid request');
+  }
+});
 // Обработка POST-запроса с результатами теста
 app.post('/saveTestResults', (req, res) => {
   const userAnswers = req.body.answers;
@@ -341,10 +447,6 @@ app.post('/send-message', (req, res) => {
   });
 });
   
-  app.post('/login', passport.authenticate('local', {
-    successRedirect: '/lk', // После успешного входа перенаправление на "Личный кабинет"
-    failureRedirect: '/', // При неудачной аутентификации перенаправление на страницу входа
-  }));
 
   app.get('/admin', (req, res) => {
     res.redirect('https://app.forestadmin.com/SmartPath');

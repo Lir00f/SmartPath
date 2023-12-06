@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="./fontawesome-free-5.13.0-web/css/all/css">
     <script src="swiper.js"></script>
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.css">
   </head>
   <body>
     <div class="running-text-container">
@@ -43,19 +45,19 @@
       })
       </script>
       <script>
-        
+document.addEventListener('DOMContentLoaded', function () {
+  const burger = document.querySelector('.menu-icon');
+  const menu = document.querySelector('.menu');
+  const body = document.body;
 
-const burger = document.querySelector('.menu-icon');
-const menu = document.querySelector('.menu');
-const body = document.body
-
-if (burger && menu) {
+  if (burger && menu) {
     burger.addEventListener('click', () => {
-        burger.classList.toggle('_active');
-        menu.classList.toggle('_active');
-        body.classList.toggle('_lock');
-    })
-}
+      burger.classList.toggle('_active');
+      menu.classList.toggle('_active');
+      body.classList.toggle('_lock');
+    });
+  }
+});
       </script>
     <script type="module" src="src/js/main.js"></script>
     <header id="header-section">
@@ -74,18 +76,20 @@ if (burger && menu) {
                 <% } else { %>
 
                   <% } %> 
+                  <% if (user) { %>
+                    <!-- Пользователь аутентифицирован, показываем кнопку "Выйти" -->
+                    <form id="logoutForm" method="post" action="/logout">
+                      <button class="header__btn" type="submit">Выйти</button>
+                    </form>
+                  <% } else { %>
+                    <!-- Пользователь не аутентифицирован, показываем кнопки "Регистрация" и "Вход" -->
+                    <button class="header__btn"><a href="register" class="header__link">Регистрация</a></button>
+                    <button class="header__btn" id="loginButton">Вход</button>
+                  <% } %>               
+                  
               </ul>
             </nav>
-            <% if (user) { %>
-              <!-- Пользователь аутентифицирован, показываем кнопку "Выйти" -->
-              <form id="logoutForm" method="post" action="/logout">
-                <button class="header__btn" type="submit">Выйти</button>
-              </form>
-            <% } else { %>
-              <!-- Пользователь не аутентифицирован, показываем кнопки "Регистрация" и "Вход" -->
-              <button class="header__btn"><a href="register" class="header__link">Регистрация</a></button>
-              <button class="header__btn" id="loginButton">Вход</button>
-            <% } %>               
+           
             <script>
 const logoutForm = document.getElementById('logoutForm');
 
@@ -156,6 +160,9 @@ if (logoutForm) {
   <div class="modal-content">
     <span class="close" id="loginClose">&times;</span>
     <h2>Вход</h2>
+    <script>
+      
+    </script>
     <form action="/login" method="POST">
       <label for="username">Имя пользователя:</label>
       <input type="text" id="username" name="username" required>

@@ -314,9 +314,6 @@ ol li {
   }
 }
 @media (max-width: 892px) {
-  .header__btn {
-    display: none;
-  }
 }
 #hero-section {
   height: 650px;
@@ -642,7 +639,7 @@ ol li {
     font-size: 28px;
   }
   .header__btn {
-    margin-left: 0;
+    margin-left: 80px;
   }
   #hero-section {
     height: 450px;

@@ -15,7 +15,7 @@
         <!-- Sidebar Section -->
         <aside>
             <div class="toggle">
-                <div class="logo">
+                <div class="logo" style="cursor: pointer;" onclick="location.href='/';">
                     <img src="images/logo.png">
                     <h2>Smart<span class="danger">Path</span></h2>
                 </div>
@@ -27,23 +27,11 @@
             </div>
 
             <div class="sidebar">
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        dashboard
-                    </span>
-                    <h3>Дэшборд</h3>
-                </a>
-                <a href="#">
+                <a href="friends">
                     <span class="material-icons-sharp">
                         person_outline
                     </span>
                     <h3>Друзья</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        receipt_long
-                    </span>
-                    <h3>История</h3>
                 </a>
                 <a href="lk">
                     <span class="material-icons-sharp">
@@ -62,25 +50,7 @@
                     <span class="material-icons-sharp">
                         inventory
                     </span>
-                    <h3>Задачи</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        report_gmailerrorred
-                    </span>
-                    <h3>Отчёты</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        settings
-                    </span>
-                    <h3>Настройки</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        add
-                    </span>
-                    <h3>Добавить пользователя</h3>
+                    <h3>Тесты</h3>
                 </a>
                 <a href="#" id="logout-link">
                     <span class="material-icons-sharp">
@@ -395,8 +365,14 @@ function sendMessage() {
   
                     </div>
                     <div class="profile-photo">
-                        <img src="<%= targetUser.image %>" alt="Profile Photo">
-                      </div>                      
+                        <% if (targetUser.id === 33 || targetUser.id === 30 ) { %>
+                            <video src="<%= targetUser.image %>" autoplay loop muted playsinline alt="Profile Video"
+                                style="width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover;">
+                            </video>                            
+                        <% } else { %>
+                            <img src="<%= targetUser.image %>" alt="Profile Photo">
+                        <% } %>
+                      </div>                    
                 </div>
 
             </div>
